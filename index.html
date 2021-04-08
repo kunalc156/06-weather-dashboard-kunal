@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Weather Dashboard</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $(function () {
+        $('#sortable').sortable();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+       <h1>Weather Dashboard</h1>
+    </header>    
+    <div class="container">
+        <div class="left-section">
+          <div class="search-section">
+            <form id="city-form" class="card-body">
+              <h3>Search for a City:</h3>
+              <input name="cityname" id="cityname" type="text" autofocus="true" class="form-input" />
+              <button type="submit" class="btn"><i class='fa fa-search'></i></button>
+            </form>
+          </div>
+          <div class="list-section">
+            <ul id="sortable">
+              
+            </ul>
+          </div>
+        </div>
+        <div class="right-section">
+          <div class="current-forecast"></div>
+          <div class="extensive-forecast"></div>
+        </div>
+    </div>
+   
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="./assets/js/script.js"></script>
+  </html>
