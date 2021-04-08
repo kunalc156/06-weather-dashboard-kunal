@@ -29,6 +29,8 @@ var formSubmitHandler = function (event) {
  */
 function resetSections() {
     currentForecastSection.textContent = "";
+    extensiveForecastSection.textContent = "";
+
 }
 
 var getExtensiveWeatherReport =  function (cityname) {
@@ -183,6 +185,17 @@ var displayCurrentWeather = function (data, cityname) {
 
 };
 
+/**
+ *  list element on click function to get weather details
+ * @param {*} event 
+ */
+function getWeatherDetails(event) {
+
+  resetSections();  
+  getCityCurrentWeatherReport(event.target.id);
+  getExtensiveWeatherReport(event.target.id);
+}
+
   /**
    * store data in local storage
    * @param {*} data 
@@ -203,7 +216,9 @@ var displayCurrentWeather = function (data, cityname) {
     while ( i-- ) {
         var liel = document.createElement('li');
         liel.setAttribute("class", "ui-state-default" );
+        liel.setAttribute("id", keys[i] );
         liel.textContent =  keys[i] ;
+        liel.addEventListener('click', getWeatherDetails);
 
         listEl.appendChild(liel);
     }
@@ -212,3 +227,4 @@ var displayCurrentWeather = function (data, cityname) {
   
 // adding event listeners to various form elements  
 cityFormEl.addEventListener('submit', formSubmitHandler);
+createHistoryList();
