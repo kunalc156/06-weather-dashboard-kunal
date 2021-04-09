@@ -4,10 +4,13 @@
     --color-three: #f0f0f0;
 }
 
+/** applied to all **/
 * {
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+/** elements **/
 
 header{
     background-color: var(--color-one) ;
@@ -90,6 +93,31 @@ header{
     height: 40px;
 }
 
+#uv-index-currrent-section {
+    display:  flex;
+}
+
+.extreme-color {
+    background-color: red ;
+    color: var(--color-two);
+    padding: 2px;
+    margin-left: 3px;
+}
+
+.moderate-color {
+    background-color: yellow ;
+    color: var(--color-one);
+    padding: 2px;
+    margin-left: 3px;
+}
+
+.low-color {
+    background-color: orange ;
+    color: var(--color-one);
+    padding: 2px;
+    margin-left: 3px;
+}
+
 /** Extensive forecast section **/
 
 .extensive-forecast {
@@ -111,6 +139,8 @@ header{
     margin: 10px;
     line-height: 2rem;
 }
+
+
 
 @media screen and (max-width: 600px) {
     .container{

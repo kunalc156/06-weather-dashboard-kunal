@@ -126,7 +126,66 @@ var getCityCurrentWeatherReport = function (cityname) {
         alert('Unable to fetch the weather details');
       });
   };
+
+ 
+ /**
+  * get city current uv index
+  * @param {*} cityname 
+  * @param {*} lat 
+  * @param {*} long 
+  */
+var getCityCurrentUVIndex = function (cityname, lat,long) {
   
+
+  var apiUrl = 'https://api.openweathermap.org/data/2.5/uvi?lat=' + lat + '&lon=' + long + '&appid=beeb191248afe1f8385287e2e919c907';
+
+  fetch(apiUrl)
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          displayUVIndex(data);
+        });
+      } else {
+        alert('Error: ' + response.statusText);
+      }
+    })
+    .catch(function (error) {
+      alert('Unable to fetch the weather details');
+    });
+};
+  
+/**
+ *  display uv index section
+ * @param {*} data 
+ */
+
+var displayUVIndex =  function(data) {
+ 
+    // UV index not present
+    var headingEl = document.createElement('div');
+    headingEl.id = "uv-index-currrent-section";
+    var headingElDivOne = document.createElement('div');
+    headingElDivOne.textContent = "UV Index: ";
+    headingEl.appendChild(headingElDivOne);
+    currentForecastSection.appendChild(headingEl);
+    
+    var headingElDivTwo = document.createElement("div");
+    headingElDivTwo.id = "uv-value";
+    headingElDivTwo.textContent = data.value;
+    headingEl.appendChild(headingElDivTwo);
+  
+
+    if( data.value >= 11 ) {
+      headingElDivTwo.setAttribute("class", "extreme-color");
+    } else if(data.value >= 6 && data.value < 11)  {
+      headingElDivTwo.setAttribute("class", "moderate-color");
+     }else if(data.value > 0 && data.value < 6)  {
+      headingElDivTwo.setAttribute("class", "low-color");
+    }
+    currentForecastSection.appendChild(headingEl); 
+};
+
+
 /**
  * display current weather elements
  * @param {*} data 
@@ -176,12 +235,11 @@ var displayCurrentWeather = function (data, cityname) {
         windEl.textContent = "Wind Speed: " + data.wind.speed +"MPH";
         currentForecastSection.appendChild(windEl);
     }
-    
-    // UV index
-   /* var headingEl = document.createElement('div');
-    headingEl.id = "city-name-currrent-section";
-    headingEl.textContent = cityname + " " +  moment().format("MM/DD/Y");
-    currentForecastSection.appendChild(headingEl); */
+
+    if(data.coord) {
+      getCityCurrentUVIndex(cityname, data.coord.lat, data.coord.lon);
+    }
+   
 
 };
 
